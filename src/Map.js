@@ -36,6 +36,7 @@ function Map({ countries, casesType = 'cases', center, zoom, mode, state }) {
                         map.on('drag', function() {
                             map.panInsideBounds(bounds, { animate: false });
                         });
+                        map.setMinZoom( 2 );
                         map.setZoom(zoom)
                         map.setView(L.latLng(center))
                         map.eachLayer(function(layer) {

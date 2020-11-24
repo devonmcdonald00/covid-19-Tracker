@@ -37,7 +37,6 @@ function App() {
       await fetch ('https://api.covidtracking.com/v1/states/current.json')
         .then(response => response.json())
         .then(data => {
-          console.log(data)
           setStates(data)
       })
     }
