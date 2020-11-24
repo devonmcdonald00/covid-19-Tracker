@@ -4,6 +4,7 @@ import { MapContainer as LeafletMap, TileLayer, MapConsumer } from 'react-leafle
 import './Map.css'
 import { showDataOnMap } from './util';
 import numeral from 'numeral'
+const statesLoc = require('./states.json')
 
 
 const casesTypeColors = {
@@ -21,7 +22,7 @@ const casesTypeColors = {
     }
 }
 
-function Map({ countries, casesType = 'cases', center, zoom, circles }) {
+function Map({ countries, casesType = 'cases', center, zoom, mode, state }) {
 
     return (
         <div className='map'>
@@ -35,14 +36,14 @@ function Map({ countries, casesType = 'cases', center, zoom, circles }) {
                         map.on('drag', function() {
                             map.panInsideBounds(bounds, { animate: false });
                         });
-                        map.setView(L.latLng(center))
                         map.setZoom(zoom)
+                        map.setView(L.latLng(center))
                         map.eachLayer(function(layer) {
                             if(layer.options.radius){
                                 map.removeLayer(layer)
                             }
                           });
-                        if(circles){
+                        if(!mode){
                             countries.map(country => (
                                 (
                                     L.circle(L.latLng(country.countryInfo.lat, country.countryInfo.long), {
@@ -55,6 +56,16 @@ function Map({ countries, casesType = 'cases', center, zoom, circles }) {
                                 )
                                 
                             ))
+                        }
+                        else{
+                            if(state.positive){
+                                L.circle(L.latLng(center), {
+                                    color: casesTypeColors[casesType].hex,
+                                    fillColor: casesTypeColors[casesType].hex,
+                                    fillOpacity: .15,
+                                    radius: casesType === 'cases' ? Math.sqrt(state.positive) * casesTypeColors[casesType].multiplier : casesType === 'recovered' ? Math.sqrt(state.recovered) * casesTypeColors[casesType].multiplier : Math.sqrt(state.death) * casesTypeColors[casesType].multiplier
+                                }).addTo(map).bindPopup("<div class='popup'><img class='flag' src='" + statesLoc[state.state].state_flag_url + "' }}/><div class='info-name'>" + state.state + "</div><div class='info-container'><div class='info-confirmed'>Cases: " + numeral(state.positive).format('0,0') +"</div><div class='info-recovered'>Recovered: " + numeral(state.recovered).format('0,0') + "</div><div class='info-deaths'>Deaths: " + numeral(state.death).format('0,0') + "</div></div></div>")
+                            }
                         }
                         return null
                     }}
