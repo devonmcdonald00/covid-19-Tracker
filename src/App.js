@@ -169,7 +169,7 @@ function App() {
                   {
                     states.map(state =>(
                       statesLoc.hasOwnProperty(state.state) ? 
-                      <MenuItem value={state.state}>{state.state}</MenuItem> : <></>
+                      <MenuItem value={state.state}>{statesLoc[state.state].name}</MenuItem> : <></>
                     ))
                   }
                 </Select>

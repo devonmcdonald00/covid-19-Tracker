@@ -65,7 +65,7 @@ function Map({ countries, casesType = 'cases', center, zoom, mode, state }) {
                                     fillColor: casesTypeColors[casesType].hex,
                                     fillOpacity: .15,
                                     radius: casesType === 'cases' ? Math.sqrt(state.positive) * casesTypeColors[casesType].multiplier : casesType === 'recovered' ? Math.sqrt(state.recovered) * casesTypeColors[casesType].multiplier : Math.sqrt(state.death) * casesTypeColors[casesType].multiplier
-                                }).addTo(map).bindPopup("<div class='popup'><img class='flag' src='" + statesLoc[state.state].state_flag_url + "' }}/><div class='info-name'>" + state.state + "</div><div class='info-container'><div class='info-confirmed'>Cases: " + numeral(state.positive).format('0,0') +"</div><div class='info-recovered'>Recovered: " + numeral(state.recovered).format('0,0') + "</div><div class='info-deaths'>Deaths: " + numeral(state.death).format('0,0') + "</div></div></div>")
+                                }).addTo(map).bindPopup("<div class='popup'><img class='flag' src='" + statesLoc[state.state].state_flag_url + "' }}/><div class='info-name'>" + statesLoc[state.state].name + "</div><div class='info-container'><div class='info-confirmed'>Cases: " + numeral(state.positive).format('0,0') +"</div><div class='info-recovered'>Recovered: " + numeral(state.recovered).format('0,0') + "</div><div class='info-deaths'>Deaths: " + numeral(state.death).format('0,0') + "</div></div></div>")
                             }
                         }
                         return null
