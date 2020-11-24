@@ -20,8 +20,16 @@ body {
 }
 
 .app__header > h1{
-  color: #fc3c3c;
-  font-size: 2rem;
+  color: #f5f6fa;
+  font-size: 1.8rem;
+  font-family: 'Quicksand', sans-serif;
+  background-color: gray;
+  width: 400px;
+  border-radius: 10px;
+  padding: 5px;
+  padding-left: 20px;
+  margin-right: 20px;
+  min-width: 300px;
 }
 
 .app__stats{
@@ -65,3 +73,5 @@ body {
     margin-right: 0;
   }
 }
+
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
