@@ -126,7 +126,7 @@ function App() {
       <div className='app__left'>
         <div className='app__header'>
           <h1>COVID-19 Tracker</h1>
-          <div style={{flex: 0.7, display: 'flex', padding: 0}}>
+          <div style={{display: 'flex', padding: 0}}>
             <FormControlLabel
               control={
                 <Switch
